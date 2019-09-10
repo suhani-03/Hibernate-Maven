@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
+
+<context:component-scan base-package="com.maven.HibernateSim" />
+<context:annotation-config></context:annotation-config>
+<context:property-placeholder location="classpath:app.properties" />
+<!--
+<bean  id = "Airtel" class = "com.maven.HibernateSim.Airtel"> 
+<property name="mss" ref="MessageSender" />
+<constructor-arg name="smsCharge" value="1.2" />
+<constructor-arg name="callCharge" value="1.5" /> 
+<constructor-arg name = "internetSpeed" value = "5" />
+</bean>
+-->
+<bean  id = "Idea" class = "com.maven.HibernateSim.Idea">
+	<property name="callCharge" value="1.5" />
+	<property name = "internetSpeed" value = "2" />
+</bean>
+
+<bean id = "MessageSender" class="com.maven.HibernateSim.MessageSender" scope="singleton" lazy-init="true">
+	<property name="smsCharge" value="10" />
+	<property name="mmsCharge" value="20" />
+</bean>
+
+<bean id="Mobile" class = "com.maven.HibernateSim.Mobile" scope="singleton" lazy-init="true" />
+ 
+<bean id = "Airtel" class = "com.maven.HibernateSim.Airtel" scope="singleton" lazy-init="true">
+	<property name="callCharge" value="1" /> 
+	<property name="internetSpeed" value="3" />
+	<property name="supportedNetworks">
+		<map>
+			<entry key = "LTE" value = "2017" />
+			<entry key = "VoLTE" value = "2019" />
+			<entry key = "HSPA" value = "2010" />
+		</map>
+	</property>
+</bean>
+</beans>
